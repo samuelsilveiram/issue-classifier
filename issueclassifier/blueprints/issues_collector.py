@@ -1,16 +1,18 @@
 # coding: utf-8
-# import os
-# from werkzeug import secure_filename
+import requests
 from flask import (
     Blueprint, request, render_template, jsonify
-    # , current_app, send_from_directory, 
 )
-# from ..db import get_table
+from github import Github
 
 issues_collector_blueprint = Blueprint('issues_collector', __name__)
 
 @issues_collector_blueprint.route("/issuescollector")
 def index():
-    # noticias = get_table('noticias')
-    # todas_as_noticias = noticias.all()
-    return jsonify({'teste': 'Funcionou galo'})
+    access_token = 'TOKEN_HERE'
+
+    gh = Github(access_token, base_url='https://api.github.com')
+
+    gh.get_repo('REPO_HERE')
+    
+    return jsonify({'funcionou':'Sim, é claro..'})
